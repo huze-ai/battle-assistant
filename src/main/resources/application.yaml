@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: battle-assistant
+
+server:
+  port: 8081
