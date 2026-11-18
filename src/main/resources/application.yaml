@@ -1,6 +1,24 @@
 spring:
   application:
     name: battle-assistant
+  datasource:
+    url: ${BATTLE_DB_URL:jdbc:mysql://127.0.0.1:3306/battle_assistant}
+    username: ${BATTLE_DB_USER:battle_assistant}
+    password: ${BATTLE_DB_PASSWORD:}
+  servlet:
+    multipart:
+      max-file-size: 8MB
+      max-request-size: 9MB
+  sql:
+    init:
+      mode: always
 
 server:
-  port: 8081
+  port: 8080
+
+preparation:
+  avatar-base-url: ${BATTLE_AVATAR_BASE_URL:}
+  admin-token: ${BATTLE_PREPARATION_ADMIN_TOKEN:}
+  refresh-ms: ${BATTLE_AVATAR_REFRESH_MS:60000}
+  match-threshold: ${BATTLE_MATCH_THRESHOLD:0.90}
+  match-margin: ${BATTLE_MATCH_MARGIN:0.025}

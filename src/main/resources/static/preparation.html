@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>赛前阵容识别</title>
+<style>body{font:16px system-ui;background:#f3f5f8;color:#182434;max-width:1100px;margin:32px auto;padding:0 20px}h1{font-size:26px}section{background:white;padding:20px;border-radius:12px;margin:18px 0}button,input{font:inherit;padding:9px;box-sizing:border-box}button{cursor:pointer}input:not([type=file]){max-width:100%;margin:4px 0}label{display:block;margin:10px 0}canvas{max-width:100%;height:auto;border:1px solid #ccc;touch-action:none}#cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:12px}.card{border:1px solid #ddd;border-radius:8px;padding:12px}.card img{width:100px;display:block}.card input{width:100%}pre{white-space:pre-wrap;overflow-wrap:anywhere}#status{font-weight:bold}small{color:#566579}</style>
+<h1>赛前阵容识别</h1>
+<p>提取双方精灵、默认热门特性和首发。性别、等级及倒计时不参与识别。</p>
+<section><label>选择赛前截图 <input id="file" type="file" accept="image/png,image/jpeg"></label>
+<p>在图上从左上拖到右下，框选<strong>游戏内容</strong>，排除外侧黑边／投屏边栏。绿色框应覆盖 12 个完整头像。本版仅适配参考图中的阵容布局。</p>
+<canvas id="preview" hidden></canvas>
+<p><button id="reset" disabled>使用整张图片</button> <button id="recognize" disabled>识别双方阵容</button> <button id="health">检查资料状态</button></p>
+<p id="status" role="status">请选择截图。</p><div id="result"></div></section>
+<section><h2>头像素材录入</h2><p>每张头像先下载、确认身份，再上传到 OSS 的 avatars/ 目录。填写上传时使用的 Key 和真实资料，最后保存。更改后约一分钟内自动预加载。</p>
+<label>资料管理令牌 <input id="token" type="password" autocomplete="off" placeholder="BATTLE_PREPARATION_ADMIN_TOKEN"></label>
+<small>令牌仅保留在当前输入框。头像应使用带版本号的新 Key，避免修改原图后缓存未更新。</small>
+<div id="cards"></div></section>
+<script src="/preparation.js"></script></html>

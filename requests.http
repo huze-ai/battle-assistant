@@ -1,0 +1,11 @@
+### 新增精灵资料
+POST http://localhost:8080/api/elves
+Content-Type: application/json
+
+{
+  "name": "测试精灵",
+  "types": ["水"]
+}
+
+### 查询全部精灵
+GET http://localhost:8080/api/elves

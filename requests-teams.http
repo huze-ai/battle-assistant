@@ -1,0 +1,52 @@
+@baseUrl = http://localhost:8080
+
+### 1. 新建演示精灵（每次执行会新增一条）
+# @name createElf
+POST {{baseUrl}}/api/elves
+Content-Type: application/json
+
+{"name":"队伍演示精灵","types":["水"]}
+
+### 2. 新建演示技能
+# @name createSkill
+POST {{baseUrl}}/api/skills
+Content-Type: application/json
+
+{"name":"队伍演示技能","description":"测试资料，不代表真实游戏规则"}
+
+### 3. 新建队伍（需先依次执行 1、2，自动引用响应中的 ID）
+# @name createTeam
+POST {{baseUrl}}/api/teams
+Content-Type: application/json
+
+{
+  "name":"我的演示队伍",
+  "members":[{
+    "elfId":{{createElf.response.body.$.id}},
+    "level":50,
+    "skillIds":[{{createSkill.response.body.$.id}}],
+    "stats":{"hp":200,"speed":100}
+  }]
+}
+
+### 4. 查询该队伍
+GET {{baseUrl}}/api/teams/{{createTeam.response.body.$.id}}
+
+### 5. 查询全部队伍
+GET {{baseUrl}}/api/teams
+
+### 6. 修改整队（需先执行 1、2、3）
+PUT {{baseUrl}}/api/teams/{{createTeam.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "name":"修改后的演示队伍",
+  "members":[{
+    "elfId":{{createElf.response.body.$.id}},
+    "nickname":"主力",
+    "skillIds":[{{createSkill.response.body.$.id}}]
+  }]
+}
+
+### 7. 可选：删除刚创建的演示队伍；不删除基础资料
+DELETE {{baseUrl}}/api/teams/{{createTeam.response.body.$.id}}
